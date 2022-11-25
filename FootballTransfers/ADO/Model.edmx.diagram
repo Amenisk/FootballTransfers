@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4180569a6f2b4bf8b02d6a7920ee6501" Name="Diagram1">
+        <EntityTypeShape EntityType="FootballTransfersModel.Accounts" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootballTransfersModel.Characterics" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootballTransfersModel.FootballClub" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootballTransfersModel.Footballers" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootballTransfersModel.Roles" Width="1.5" PointX="3.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootballTransfersModel.TransfersHistory" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootballTransfersModel.Users" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="FootballTransfersModel.FK_Accounts_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="FootballTransfersModel.FK_Footballers_Characterics" ManuallyRouted="false" />
+        <AssociationConnector Association="FootballTransfersModel.FK_TransfersHistory_Characterics" ManuallyRouted="false" />
+        <AssociationConnector Association="FootballTransfersModel.FK_Footballers_FootballClub" ManuallyRouted="false" />
+        <AssociationConnector Association="FootballTransfersModel.FK_TransfersHistory_FootballClub" ManuallyRouted="false" />
+        <AssociationConnector Association="FootballTransfersModel.FK_TransfersHistory_FootballClub1" ManuallyRouted="false" />
+        <AssociationConnector Association="FootballTransfersModel.FK_Users_FootballClub" ManuallyRouted="false" />
+        <AssociationConnector Association="FootballTransfersModel.FK_TransfersHistory_Footballers" ManuallyRouted="false" />
+        <AssociationConnector Association="FootballTransfersModel.FK_Users_Roles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
