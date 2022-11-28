@@ -68,41 +68,41 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="ADO\Accounts.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+    <Compile Include="ADOApp\Accounts.cs">
+      <DependentUpon>FootballTransfersModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ADO\Characterics.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+    <Compile Include="ADOApp\Characterics.cs">
+      <DependentUpon>FootballTransfersModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ADO\FootballClub.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+    <Compile Include="ADOApp\FootballClubs.cs">
+      <DependentUpon>FootballTransfersModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ADO\Footballers.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+    <Compile Include="ADOApp\Footballers.cs">
+      <DependentUpon>FootballTransfersModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ADO\Model.Context.cs">
+    <Compile Include="ADOApp\FootballTransfersModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model.Context.tt</DependentUpon>
+      <DependentUpon>FootballTransfersModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ADO\Model.cs">
+    <Compile Include="ADOApp\FootballTransfersModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>FootballTransfersModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ADO\Model.Designer.cs">
+    <Compile Include="ADOApp\FootballTransfersModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model.edmx</DependentUpon>
+      <DependentUpon>FootballTransfersModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="ADO\Roles.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+    <Compile Include="ADOApp\Roles.cs">
+      <DependentUpon>FootballTransfersModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ADO\TransfersHistory.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+    <Compile Include="ADOApp\TransfersHistory.cs">
+      <DependentUpon>FootballTransfersModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ADO\Users.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+    <Compile Include="ADOApp\Users.cs">
+      <DependentUpon>FootballTransfersModel.tt</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -112,20 +112,48 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\AuthorizationPage.xaml">
+    <Page Include="PageApp\AuthorizationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\RegistrationPage.xaml">
+    <Page Include="PageApp\PagesAdmin\FootballClubRegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageApp\PagesAdmin\FootballerRegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageApp\PagesAdmin\MainAdminPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageApp\PagesCouch\MainCouchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageApp\RegistrationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\AuthorizationPage.xaml.cs">
+    <Compile Include="PageApp\AuthorizationPage.xaml.cs">
       <DependentUpon>AuthorizationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\RegistrationPage.xaml.cs">
+    <Compile Include="PageApp\PagesAdmin\FootballClubRegistrationPage.xaml.cs">
+      <DependentUpon>FootballClubRegistrationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageApp\PagesAdmin\FootballerRegistrationPage.xaml.cs">
+      <DependentUpon>FootballerRegistrationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageApp\PagesAdmin\MainAdminPage.xaml.cs">
+      <DependentUpon>MainAdminPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageApp\PagesCouch\MainCouchPage.xaml.cs">
+      <DependentUpon>MainCouchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageApp\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -145,12 +173,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="ADO\Model.edmx">
+    <EntityDeploy Include="ADOApp\FootballTransfersModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+      <LastGenOutput>FootballTransfersModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ADO\Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
+    <None Include="ADOApp\FootballTransfersModel.edmx.diagram">
+      <DependentUpon>FootballTransfersModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -161,21 +189,21 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Content Include="ADO\Model.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
-      <DependentUpon>Model.edmx</DependentUpon>
-    </Content>
-    <Content Include="ADO\Model.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="ADOApp\FootballTransfersModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FootballTransfersModel.edmx</DependentUpon>
+      <LastGenOutput>FootballTransfersModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ADOApp\FootballTransfersModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FootballTransfersModel.edmx</DependentUpon>
+      <LastGenOutput>FootballTransfersModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

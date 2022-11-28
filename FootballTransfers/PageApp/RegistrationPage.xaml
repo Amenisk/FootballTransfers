@@ -8,20 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RegistrationPage">
 
-    <Page.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Margin" Value="5"></Setter>
-        </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="5"></Setter>
-            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-        </Style>
-        <Style TargetType="TextBlock">
-            <Setter Property="Margin" Value="5"></Setter>
-        </Style>
-    </Page.Resources>
-
-    <Grid Background="White">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="5*"/>
@@ -29,12 +16,12 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="12*"/>
+            <RowDefinition Height="20*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
-            <TextBlock>Name</TextBlock>
+            <TextBlock>Full name</TextBlock>
             <TextBox x:Name="tbName" Height="30"></TextBox>
 
             <TextBlock>Login</TextBlock>

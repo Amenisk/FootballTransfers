@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using FootballTransfers.ADO;
+using FootballTransfers.ADOApp;
 
 namespace FootballTransfers.Pages
 {
@@ -25,7 +25,7 @@ namespace FootballTransfers.Pages
         {
             InitializeComponent();
             cmbRoles.ItemsSource = App.Connection.Roles.ToList();
-            cmbClubs.ItemsSource = App.Connection.FootballClub.ToList();
+            cmbClubs.ItemsSource = App.Connection.FootballClubs.ToList();
         }
 
         private void Reverse(object sender, RoutedEventArgs e)
@@ -36,7 +36,7 @@ namespace FootballTransfers.Pages
         private void Registration(object sender, RoutedEventArgs e)
         {
             if (tbLogin.Text != "" && tbPassword.Text != "" 
-                && tbName.Text != "" && cmbRoles.SelectedItem == null)
+                && tbName.Text != "" && cmbRoles.SelectedItem != null)
             {
                 var newUser = new Users()
                 {
@@ -54,7 +54,7 @@ namespace FootballTransfers.Pages
                     if(cmbClubs.SelectedItem != null)
                     {
                         newUser.FootballClub_Id = 
-                            ((FootballClub)cmbRoles.SelectedItem).FootballClub_Id;
+                            ((FootballClubs)cmbRoles.SelectedItem).FootballClub_Id;
                     }
                     else
                     {
@@ -78,7 +78,7 @@ namespace FootballTransfers.Pages
 
         private void Selection(object sender, SelectionChangedEventArgs e)
         {
-            if (((Roles)cmbRoles.SelectedItem).Name == "Coach")
+            if (((Roles)cmbRoles.SelectedItem).Role_Id == 2)
             {
                 tbFootballClub.Visibility = Visibility.Visible;
                 cmbClubs.Visibility = Visibility.Visible;

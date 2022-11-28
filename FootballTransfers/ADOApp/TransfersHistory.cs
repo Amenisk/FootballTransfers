@@ -7,18 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FootballTransfers.ADO
+namespace FootballTransfers.ADOApp
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Accounts
+    public partial class TransfersHistory
     {
-        public int Account_Id { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public int User_Id { get; set; }
+        public int Transfer_Id { get; set; }
+        public int Footballer_Id { get; set; }
+        public int Characteristic_Id { get; set; }
+        public int ClubOfSale { get; set; }
+        public int ClubOfPurchase { get; set; }
+        public int TransferCost { get; set; }
+        public System.DateTime DateAndTime { get; set; }
     
-        public virtual Users Users { get; set; }
+        public virtual FootballClubs FootballClubs { get; set; }
+        public virtual FootballClubs FootballClubs1 { get; set; }
+        public virtual Footballers Footballers { get; set; }
     }
 }

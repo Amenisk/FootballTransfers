@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище FootballTransfersModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище FootballTransfersModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Accounts">
           <Key>
             <PropertyRef Name="Account_Id" />
@@ -26,13 +26,14 @@
           <Property Name="Deffending" Type="int" Nullable="false" />
           <Property Name="Physicality" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="FootballClub">
+        <EntityType Name="FootballClubs">
           <Key>
             <PropertyRef Name="FootballClub_Id" />
           </Key>
           <Property Name="FootballClub_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Budget" Type="int" Nullable="false" />
+          <Property Name="Logo" Type="image" Nullable="false" />
         </EntityType>
         <EntityType Name="Footballers">
           <Key>
@@ -43,6 +44,7 @@
           <Property Name="TransferCost" Type="int" Nullable="false" />
           <Property Name="Characteristic_Id" Type="int" Nullable="false" />
           <Property Name="FootballClub_Id" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="image" Nullable="false" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -61,6 +63,7 @@
           <Property Name="ClubOfSale" Type="int" Nullable="false" />
           <Property Name="ClubOfPurchase" Type="int" Nullable="false" />
           <Property Name="TransferCost" Type="int" Nullable="false" />
+          <Property Name="DateAndTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -96,10 +99,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Footballers_FootballClub">
-          <End Role="FootballClub" Type="Self.FootballClub" Multiplicity="1" />
+          <End Role="FootballClubs" Type="Self.FootballClubs" Multiplicity="1" />
           <End Role="Footballers" Type="Self.Footballers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="FootballClub">
+            <Principal Role="FootballClubs">
               <PropertyRef Name="FootballClub_Id" />
             </Principal>
             <Dependent Role="Footballers">
@@ -107,23 +110,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TransfersHistory_Characterics">
-          <End Role="Characterics" Type="Self.Characterics" Multiplicity="1" />
-          <End Role="TransfersHistory" Type="Self.TransfersHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Characterics">
-              <PropertyRef Name="Characteristic_Id" />
-            </Principal>
-            <Dependent Role="TransfersHistory">
-              <PropertyRef Name="Characteristic_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TransfersHistory_FootballClub">
-          <End Role="FootballClub" Type="Self.FootballClub" Multiplicity="1" />
+          <End Role="FootballClubs" Type="Self.FootballClubs" Multiplicity="1" />
           <End Role="TransfersHistory" Type="Self.TransfersHistory" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="FootballClub">
+            <Principal Role="FootballClubs">
               <PropertyRef Name="FootballClub_Id" />
             </Principal>
             <Dependent Role="TransfersHistory">
@@ -132,10 +123,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TransfersHistory_FootballClub1">
-          <End Role="FootballClub" Type="Self.FootballClub" Multiplicity="1" />
+          <End Role="FootballClubs" Type="Self.FootballClubs" Multiplicity="1" />
           <End Role="TransfersHistory" Type="Self.TransfersHistory" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="FootballClub">
+            <Principal Role="FootballClubs">
               <PropertyRef Name="FootballClub_Id" />
             </Principal>
             <Dependent Role="TransfersHistory">
@@ -156,10 +147,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Users_FootballClub">
-          <End Role="FootballClub" Type="Self.FootballClub" Multiplicity="0..1" />
+          <End Role="FootballClubs" Type="Self.FootballClubs" Multiplicity="0..1" />
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="FootballClub">
+            <Principal Role="FootballClubs">
               <PropertyRef Name="FootballClub_Id" />
             </Principal>
             <Dependent Role="Users">
@@ -182,7 +173,7 @@
         <EntityContainer Name="Хранилище FootballTransfersModelContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Characterics" EntityType="Self.Characterics" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FootballClub" EntityType="Self.FootballClub" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FootballClubs" EntityType="Self.FootballClubs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Footballers" EntityType="Self.Footballers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransfersHistory" EntityType="Self.TransfersHistory" Schema="dbo" store:Type="Tables" />
@@ -196,19 +187,15 @@
             <End Role="Footballers" EntitySet="Footballers" />
           </AssociationSet>
           <AssociationSet Name="FK_Footballers_FootballClub" Association="Self.FK_Footballers_FootballClub">
-            <End Role="FootballClub" EntitySet="FootballClub" />
+            <End Role="FootballClubs" EntitySet="FootballClubs" />
             <End Role="Footballers" EntitySet="Footballers" />
           </AssociationSet>
-          <AssociationSet Name="FK_TransfersHistory_Characterics" Association="Self.FK_TransfersHistory_Characterics">
-            <End Role="Characterics" EntitySet="Characterics" />
-            <End Role="TransfersHistory" EntitySet="TransfersHistory" />
-          </AssociationSet>
           <AssociationSet Name="FK_TransfersHistory_FootballClub" Association="Self.FK_TransfersHistory_FootballClub">
-            <End Role="FootballClub" EntitySet="FootballClub" />
+            <End Role="FootballClubs" EntitySet="FootballClubs" />
             <End Role="TransfersHistory" EntitySet="TransfersHistory" />
           </AssociationSet>
           <AssociationSet Name="FK_TransfersHistory_FootballClub1" Association="Self.FK_TransfersHistory_FootballClub1">
-            <End Role="FootballClub" EntitySet="FootballClub" />
+            <End Role="FootballClubs" EntitySet="FootballClubs" />
             <End Role="TransfersHistory" EntitySet="TransfersHistory" />
           </AssociationSet>
           <AssociationSet Name="FK_TransfersHistory_Footballers" Association="Self.FK_TransfersHistory_Footballers">
@@ -216,7 +203,7 @@
             <End Role="TransfersHistory" EntitySet="TransfersHistory" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_FootballClub" Association="Self.FK_Users_FootballClub">
-            <End Role="FootballClub" EntitySet="FootballClub" />
+            <End Role="FootballClubs" EntitySet="FootballClubs" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
@@ -224,8 +211,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FootballTransfersModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -251,19 +237,19 @@
           <Property Name="Deffending" Type="Int32" Nullable="false" />
           <Property Name="Physicality" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Footballers" Relationship="Self.FK_Footballers_Characterics" FromRole="Characterics" ToRole="Footballers" />
-          <NavigationProperty Name="TransfersHistory" Relationship="Self.FK_TransfersHistory_Characterics" FromRole="Characterics" ToRole="TransfersHistory" />
         </EntityType>
-        <EntityType Name="FootballClub">
+        <EntityType Name="FootballClubs">
           <Key>
             <PropertyRef Name="FootballClub_Id" />
           </Key>
           <Property Name="FootballClub_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Budget" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Footballers" Relationship="Self.FK_Footballers_FootballClub" FromRole="FootballClub" ToRole="Footballers" />
-          <NavigationProperty Name="TransfersHistory" Relationship="Self.FK_TransfersHistory_FootballClub" FromRole="FootballClub" ToRole="TransfersHistory" />
-          <NavigationProperty Name="TransfersHistory1" Relationship="Self.FK_TransfersHistory_FootballClub1" FromRole="FootballClub" ToRole="TransfersHistory" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_Users_FootballClub" FromRole="FootballClub" ToRole="Users" />
+          <Property Name="Logo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Footballers" Relationship="Self.FK_Footballers_FootballClub" FromRole="FootballClubs" ToRole="Footballers" />
+          <NavigationProperty Name="TransfersHistory" Relationship="Self.FK_TransfersHistory_FootballClub" FromRole="FootballClubs" ToRole="TransfersHistory" />
+          <NavigationProperty Name="TransfersHistory1" Relationship="Self.FK_TransfersHistory_FootballClub1" FromRole="FootballClubs" ToRole="TransfersHistory" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_FootballClub" FromRole="FootballClubs" ToRole="Users" />
         </EntityType>
         <EntityType Name="Footballers">
           <Key>
@@ -274,8 +260,9 @@
           <Property Name="TransferCost" Type="Int32" Nullable="false" />
           <Property Name="Characteristic_Id" Type="Int32" Nullable="false" />
           <Property Name="FootballClub_Id" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <NavigationProperty Name="Characterics" Relationship="Self.FK_Footballers_Characterics" FromRole="Footballers" ToRole="Characterics" />
-          <NavigationProperty Name="FootballClub" Relationship="Self.FK_Footballers_FootballClub" FromRole="Footballers" ToRole="FootballClub" />
+          <NavigationProperty Name="FootballClubs" Relationship="Self.FK_Footballers_FootballClub" FromRole="Footballers" ToRole="FootballClubs" />
           <NavigationProperty Name="TransfersHistory" Relationship="Self.FK_TransfersHistory_Footballers" FromRole="Footballers" ToRole="TransfersHistory" />
         </EntityType>
         <EntityType Name="Roles">
@@ -296,9 +283,9 @@
           <Property Name="ClubOfSale" Type="Int32" Nullable="false" />
           <Property Name="ClubOfPurchase" Type="Int32" Nullable="false" />
           <Property Name="TransferCost" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Characterics" Relationship="Self.FK_TransfersHistory_Characterics" FromRole="TransfersHistory" ToRole="Characterics" />
-          <NavigationProperty Name="FootballClub" Relationship="Self.FK_TransfersHistory_FootballClub" FromRole="TransfersHistory" ToRole="FootballClub" />
-          <NavigationProperty Name="FootballClub1" Relationship="Self.FK_TransfersHistory_FootballClub1" FromRole="TransfersHistory" ToRole="FootballClub" />
+          <Property Name="DateAndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="FootballClubs" Relationship="Self.FK_TransfersHistory_FootballClub" FromRole="TransfersHistory" ToRole="FootballClubs" />
+          <NavigationProperty Name="FootballClubs1" Relationship="Self.FK_TransfersHistory_FootballClub1" FromRole="TransfersHistory" ToRole="FootballClubs" />
           <NavigationProperty Name="Footballers" Relationship="Self.FK_TransfersHistory_Footballers" FromRole="TransfersHistory" ToRole="Footballers" />
         </EntityType>
         <EntityType Name="Users">
@@ -310,7 +297,7 @@
           <Property Name="FootballClub_Id" Type="Int32" />
           <Property Name="Role_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK_Accounts_Users" FromRole="Users" ToRole="Accounts" />
-          <NavigationProperty Name="FootballClub" Relationship="Self.FK_Users_FootballClub" FromRole="Users" ToRole="FootballClub" />
+          <NavigationProperty Name="FootballClubs" Relationship="Self.FK_Users_FootballClub" FromRole="Users" ToRole="FootballClubs" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
         </EntityType>
         <Association Name="FK_Accounts_Users">
@@ -337,23 +324,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TransfersHistory_Characterics">
-          <End Role="Characterics" Type="Self.Characterics" Multiplicity="1" />
-          <End Role="TransfersHistory" Type="Self.TransfersHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Characterics">
-              <PropertyRef Name="Characteristic_Id" />
-            </Principal>
-            <Dependent Role="TransfersHistory">
-              <PropertyRef Name="Characteristic_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Footballers_FootballClub">
-          <End Role="FootballClub" Type="Self.FootballClub" Multiplicity="1" />
+          <End Role="FootballClubs" Type="Self.FootballClubs" Multiplicity="1" />
           <End Role="Footballers" Type="Self.Footballers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="FootballClub">
+            <Principal Role="FootballClubs">
               <PropertyRef Name="FootballClub_Id" />
             </Principal>
             <Dependent Role="Footballers">
@@ -362,10 +337,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TransfersHistory_FootballClub">
-          <End Role="FootballClub" Type="Self.FootballClub" Multiplicity="1" />
+          <End Role="FootballClubs" Type="Self.FootballClubs" Multiplicity="1" />
           <End Role="TransfersHistory" Type="Self.TransfersHistory" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="FootballClub">
+            <Principal Role="FootballClubs">
               <PropertyRef Name="FootballClub_Id" />
             </Principal>
             <Dependent Role="TransfersHistory">
@@ -374,10 +349,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TransfersHistory_FootballClub1">
-          <End Role="FootballClub" Type="Self.FootballClub" Multiplicity="1" />
+          <End Role="FootballClubs" Type="Self.FootballClubs" Multiplicity="1" />
           <End Role="TransfersHistory" Type="Self.TransfersHistory" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="FootballClub">
+            <Principal Role="FootballClubs">
               <PropertyRef Name="FootballClub_Id" />
             </Principal>
             <Dependent Role="TransfersHistory">
@@ -386,10 +361,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Users_FootballClub">
-          <End Role="FootballClub" Type="Self.FootballClub" Multiplicity="0..1" />
+          <End Role="FootballClubs" Type="Self.FootballClubs" Multiplicity="0..1" />
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="FootballClub">
+            <Principal Role="FootballClubs">
               <PropertyRef Name="FootballClub_Id" />
             </Principal>
             <Dependent Role="Users">
@@ -424,7 +399,7 @@
         <EntityContainer Name="FootballTransfersEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" />
           <EntitySet Name="Characterics" EntityType="Self.Characterics" />
-          <EntitySet Name="FootballClub" EntityType="Self.FootballClub" />
+          <EntitySet Name="FootballClubs" EntityType="Self.FootballClubs" />
           <EntitySet Name="Footballers" EntityType="Self.Footballers" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="TransfersHistory" EntityType="Self.TransfersHistory" />
@@ -437,24 +412,20 @@
             <End Role="Characterics" EntitySet="Characterics" />
             <End Role="Footballers" EntitySet="Footballers" />
           </AssociationSet>
-          <AssociationSet Name="FK_TransfersHistory_Characterics" Association="Self.FK_TransfersHistory_Characterics">
-            <End Role="Characterics" EntitySet="Characterics" />
-            <End Role="TransfersHistory" EntitySet="TransfersHistory" />
-          </AssociationSet>
           <AssociationSet Name="FK_Footballers_FootballClub" Association="Self.FK_Footballers_FootballClub">
-            <End Role="FootballClub" EntitySet="FootballClub" />
+            <End Role="FootballClubs" EntitySet="FootballClubs" />
             <End Role="Footballers" EntitySet="Footballers" />
           </AssociationSet>
           <AssociationSet Name="FK_TransfersHistory_FootballClub" Association="Self.FK_TransfersHistory_FootballClub">
-            <End Role="FootballClub" EntitySet="FootballClub" />
+            <End Role="FootballClubs" EntitySet="FootballClubs" />
             <End Role="TransfersHistory" EntitySet="TransfersHistory" />
           </AssociationSet>
           <AssociationSet Name="FK_TransfersHistory_FootballClub1" Association="Self.FK_TransfersHistory_FootballClub1">
-            <End Role="FootballClub" EntitySet="FootballClub" />
+            <End Role="FootballClubs" EntitySet="FootballClubs" />
             <End Role="TransfersHistory" EntitySet="TransfersHistory" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_FootballClub" Association="Self.FK_Users_FootballClub">
-            <End Role="FootballClub" EntitySet="FootballClub" />
+            <End Role="FootballClubs" EntitySet="FootballClubs" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_TransfersHistory_Footballers" Association="Self.FK_TransfersHistory_Footballers">
@@ -495,12 +466,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FootballClub">
-            <EntityTypeMapping TypeName="FootballTransfersModel.FootballClub">
-              <MappingFragment StoreEntitySet="FootballClub">
+          <EntitySetMapping Name="FootballClubs">
+            <EntityTypeMapping TypeName="FootballTransfersModel.FootballClubs">
+              <MappingFragment StoreEntitySet="FootballClubs">
                 <ScalarProperty Name="FootballClub_Id" ColumnName="FootballClub_Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Budget" ColumnName="Budget" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -512,6 +484,7 @@
                 <ScalarProperty Name="TransferCost" ColumnName="TransferCost" />
                 <ScalarProperty Name="Characteristic_Id" ColumnName="Characteristic_Id" />
                 <ScalarProperty Name="FootballClub_Id" ColumnName="FootballClub_Id" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -532,6 +505,7 @@
                 <ScalarProperty Name="ClubOfSale" ColumnName="ClubOfSale" />
                 <ScalarProperty Name="ClubOfPurchase" ColumnName="ClubOfPurchase" />
                 <ScalarProperty Name="TransferCost" ColumnName="TransferCost" />
+                <ScalarProperty Name="DateAndTime" ColumnName="DateAndTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

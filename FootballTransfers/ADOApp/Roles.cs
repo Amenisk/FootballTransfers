@@ -7,32 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FootballTransfers.ADO
+namespace FootballTransfers.ADOApp
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class FootballClub
+    public partial class Roles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public FootballClub()
+        public Roles()
         {
-            this.Footballers = new HashSet<Footballers>();
-            this.TransfersHistory = new HashSet<TransfersHistory>();
-            this.TransfersHistory1 = new HashSet<TransfersHistory>();
             this.Users = new HashSet<Users>();
         }
     
-        public int FootballClub_Id { get; set; }
+        public int Role_Id { get; set; }
         public string Name { get; set; }
-        public int Budget { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Footballers> Footballers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TransfersHistory> TransfersHistory { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TransfersHistory> TransfersHistory1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Users> Users { get; set; }
     }

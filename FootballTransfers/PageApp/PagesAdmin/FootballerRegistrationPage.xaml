@@ -1,0 +1,78 @@
+﻿<Page x:Class="FootballTransfers.PageApp.PagesAdmin.FootballerRegistrationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FootballTransfers.PageApp.PagesAdmin"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="FootballerRegistrationPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="3" Height="418" Margin="114,0,114,0">
+            <TextBlock>Full name</TextBlock>
+            <TextBox x:Name="tbFullName"></TextBox>
+            <Button Click="SelectPhoto">Select photo</Button>
+            <StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Row="0" Grid.Column="0">
+                        <TextBlock>Pace</TextBlock>
+                        <TextBox x:Name="tbPace"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="0" Grid.Column="1">
+                        <TextBlock>Shooting</TextBlock>
+                        <TextBox x:Name="tbShooting"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="0">
+                        <TextBlock>Passing</TextBlock>
+                        <TextBox x:Name="tbPassing"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="1">
+                        <TextBlock>Dribbling</TextBlock>
+                        <TextBox x:Name="tbDribbling"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Grid.Column="0">
+                        <TextBlock>Deffending</TextBlock>
+                        <TextBox x:Name="tbDeffending"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Grid.Column="1">
+                        <TextBlock>Physicality</TextBlock>
+                        <TextBox x:Name="tbPhysicality"></TextBox>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <TextBlock x:Name="tbFootballClub">Football club</TextBlock>
+            <ComboBox x:Name="cmbClubs" Margin="5">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock>Transfer cost</TextBlock>
+            <TextBox x:Name="tbTransferCost"></TextBox>
+            <Button Click="SaveFootballClub">Save football club</Button>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FootballTransfers.PageApp.PagesAdmin;
 
 namespace FootballTransfers.Pages
 {
@@ -32,21 +33,29 @@ namespace FootballTransfers.Pages
 
         private void Authorization(object sender, RoutedEventArgs e)
         {
-            if (tbLogin.Text != "" && tbPassword.Text != "")
+            if (tbLogin.Text != "" && pbPassword.Password != "")
             {
-                var account = App.Connection.Accounts.FirstOrDefault(x => x.Login == tbLogin.Text && x.Password == tbPassword.Text);
+                var account = App.Connection.Accounts.FirstOrDefault(x => x.Login == tbLogin.Text && x.Password == pbPassword.Password);
                 if (account != null)
                 {
-                    MessageBox.Show(account.Users.FullName);
+                    if(account.Users.Role_Id == 1)
+                    {
+                        NavigationService.Navigate(new MainAdminPage());
+                    }
+                    
+                    if(account.Users.Role_Id == 2)
+                    {
+
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Not have user with written login!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Not have user with written login!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
             {
-                MessageBox.Show("Fill login and password please!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Fill in login and password!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

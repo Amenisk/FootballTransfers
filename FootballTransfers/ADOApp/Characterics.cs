@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FootballTransfers.ADO
+namespace FootballTransfers.ADOApp
 {
     using System;
     using System.Collections.Generic;
@@ -18,7 +18,6 @@ namespace FootballTransfers.ADO
         public Characterics()
         {
             this.Footballers = new HashSet<Footballers>();
-            this.TransfersHistory = new HashSet<TransfersHistory>();
         }
     
         public int Characteristic_Id { get; set; }
@@ -31,7 +30,5 @@ namespace FootballTransfers.ADO
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Footballers> Footballers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TransfersHistory> TransfersHistory { get; set; }
     }
 }

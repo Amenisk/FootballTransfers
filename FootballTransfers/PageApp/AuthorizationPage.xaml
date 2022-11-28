@@ -8,20 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AuthorizationPage">
 
-    <Page.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Margin" Value="5"></Setter>
-        </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="5"></Setter>
-            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-        </Style>
-        <Style TargetType="TextBlock">
-            <Setter Property="Margin" Value="5"></Setter>
-        </Style>
-    </Page.Resources>
-
-    <Grid Background="White">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="5*"/>
@@ -38,7 +25,7 @@
             <TextBox x:Name="tbLogin" Height="30"></TextBox>
 
             <TextBlock>Password</TextBlock>
-            <TextBox x:Name="tbPassword" Height="30"></TextBox>
+            <PasswordBox x:Name="pbPassword" Height="30" Margin="5"></PasswordBox>
             <Button Height="30" Click="Authorization">Sign in</Button>
             <Button Height="30" Click="RegistrationNavigate">Registration</Button>
         </StackPanel>

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FootballTransfers.ADO
+namespace FootballTransfers.ADOApp
 {
     using System;
     using System.Data.Entity;
@@ -27,7 +27,7 @@ namespace FootballTransfers.ADO
     
         public virtual DbSet<Accounts> Accounts { get; set; }
         public virtual DbSet<Characterics> Characterics { get; set; }
-        public virtual DbSet<FootballClub> FootballClub { get; set; }
+        public virtual DbSet<FootballClubs> FootballClubs { get; set; }
         public virtual DbSet<Footballers> Footballers { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<TransfersHistory> TransfersHistory { get; set; }
