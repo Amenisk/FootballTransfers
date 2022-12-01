@@ -1,0 +1,47 @@
+﻿<Page x:Class="FootballTransfers.PagesApp.PagesCouch.FootballersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FootballTransfers.PagesApp.PagesCouch"
+      mc:Ignorable="d" 
+      d:DesignHeight="585" d:DesignWidth="1040"
+      Title="FootballersPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="4*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Image x:Name="imgLogo" Width="100" VerticalAlignment="Center" HorizontalAlignment="Center"></Image>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <TextBlock x:Name="tbNameOfClub" Height="60" FontSize="54" HorizontalAlignment="Center"></TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="240">Full name</TextBlock>
+                <TextBlock Width="240">Position</TextBlock>
+                <TextBlock Width="240">Nationality</TextBlock>
+                <TextBlock Width="240">Transfer cost</TextBlock>
+            </StackPanel>
+            <ListView x:Name="lvFootballers" SelectionChanged="GetFootballerCard">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="240" Text="{Binding FullName}"></TextBlock>
+                            <TextBlock Width="240" Text="{Binding Position}"></TextBlock>
+                            <TextBlock Width="240" Text="{Binding Nationality}"></TextBlock>
+                            <TextBlock Width="240" Text="{Binding TransferCost}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Page>

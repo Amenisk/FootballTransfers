@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FootballTransfers.PageApp.PagesAdmin;
+using FootballTransfers.PageApp.PagesCouch;
 
 namespace FootballTransfers.Pages
 {
@@ -45,7 +46,7 @@ namespace FootballTransfers.Pages
                     
                     if(account.Users.Role_Id == 2)
                     {
-
+                        NavigationService.Navigate(new MainCouchPage(App.Connection.Users.FirstOrDefault(x => x.User_Id == account.User_Id)));
                     }
                 }
                 else

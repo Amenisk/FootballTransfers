@@ -28,6 +28,8 @@ namespace FootballTransfers.PageApp.PagesAdmin
         public FootballerRegistrationPage()
         {
             InitializeComponent();
+            cmbPosition.ItemsSource = new List<string>() { "Goalkeeper", "Defender", "Halfback", "Forward" };
+            cmbClubs.ItemsSource = App.Connection.FootballClubs.ToList();
         }
 
         private void SelectPhoto(object sender, RoutedEventArgs e)
@@ -62,7 +64,9 @@ namespace FootballTransfers.PageApp.PagesAdmin
                     Photo = _photo,
                     FullName = tbFullName.Text,
                     TransferCost = int.Parse(tbTransferCost.Text),
-                    FootballClub_Id = ((FootballClubs) cmbClubs.SelectedItem).FootballClub_Id
+                    FootballClub_Id = ((FootballClubs) cmbClubs.SelectedItem).FootballClub_Id,
+                    Nationality = tbNationality.Text,
+                    Position = cmbPosition.SelectedItem.ToString()
                 };
 
                 Characterics newCharacteristic = new Characterics()
@@ -78,6 +82,9 @@ namespace FootballTransfers.PageApp.PagesAdmin
                 App.Connection.Characterics.Add(newCharacteristic);
                 App.Connection.Footballers.Add(newFootballer);
                 App.Connection.SaveChanges();
+
+                ClearForm();
+                MessageBox.Show("Footballer is registered");
             }
             else
             {
@@ -91,7 +98,8 @@ namespace FootballTransfers.PageApp.PagesAdmin
             return _photo != null && tbFullName.Text != "" && tbTransferCost.Text != ""
                 && cmbClubs.SelectedItem != null 
                 && tbPace.Text != "" && tbShooting.Text != "" && tbPassing.Text != "" 
-                && tbDribbling.Text != "" && tbDeffending.Text != "" && tbPhysicality.Text != "";
+                && tbDribbling.Text != "" && tbDeffending.Text != "" && tbPhysicality.Text != "" 
+                && cmbPosition.SelectionBoxItem != null && tbNationality.Text != "";
         }
         private bool CheckNumber(string s)
         {
@@ -150,6 +158,24 @@ namespace FootballTransfers.PageApp.PagesAdmin
             }
 
             return true;
+        }
+
+        private void ClearForm()
+        {
+            _photo = null;
+            tbFullName.Text = "";
+            tbTransferCost.Text = "";
+            cmbClubs.SelectedItem = null;
+            tbPace.Text = "";
+            tbShooting.Text = "";
+            tbPassing.Text = "";
+            tbDribbling.Text = "";
+            tbDeffending.Text = "";
+            tbPhysicality.Text = "";
+            tbTransferCost.Text = "";
+            tbNationality.Text = "";
+            cmbPosition.SelectedItem = null;
+            btnSelectPhoto.Background = Brushes.LightGray;
         }
 
 

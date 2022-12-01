@@ -1,0 +1,64 @@
+﻿<Page x:Class="FootballTransfers.PagesApp.PagesCouch.FootballerCardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FootballTransfers.PagesApp.PagesCouch"
+      mc:Ignorable="d" 
+      d:DesignHeight="585" d:DesignWidth="1040"
+      Title="FotballerCardPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Column="0" Grid.Row="0">
+                    <Image x:Name="imgPhoto" Width="200" VerticalAlignment="Center" Margin="10"></Image>
+                </StackPanel>
+                <StackPanel Grid.Column="0" Grid.Row="1">
+                    <Button x:Name="btnBuy" Visibility="Hidden" Click="BuyFootballer">Buy</Button>
+                </StackPanel>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock x:Name="tbFullName" Text="Full name: "></TextBlock>
+                    <TextBlock x:Name="tbPosition" Text="Position: "></TextBlock>
+                    <TextBlock x:Name="tbTransferCost" Text="Transfer cost: "></TextBlock>
+                    <TextBlock x:Name="tbFootballClub" Text="Football club: "></TextBlock>
+                    <TextBlock x:Name="tbNationally" Text="Nationallity: "></TextBlock>
+                    <TextBlock x:Name="tbPace" Text="Pace: "></TextBlock>
+                    <TextBlock x:Name="tbShooting" Text="Shooting: "></TextBlock>
+                    <TextBlock x:Name="tbPassing" Text="Passing: "></TextBlock>
+                    <TextBlock x:Name="tbDribbling" Text="Dribbling: "></TextBlock>
+                    <TextBlock x:Name="tbDeffending" Text="Deffending: "></TextBlock>
+                    <TextBlock x:Name="tbPhysicality" Text="Physicality: "></TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="1">
+                    <Button Width="200">Transfers</Button>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="0">
+            <TextBlock x:Name="tbBalance" Visibility="Hidden" HorizontalAlignment="Left">Budget</TextBlock>
+            <TextBlock x:Name="tbBalanceValue" Visibility="Hidden" HorizontalAlignment="Left"></TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="2">
+            <Button Click="Back" Width="100">Back</Button>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -20,6 +20,7 @@
         <AssociationConnector Association="FootballTransfersModel.FK_Users_FootballClub" ManuallyRouted="false" />
         <AssociationConnector Association="FootballTransfersModel.FK_TransfersHistory_Footballers" ManuallyRouted="false" />
         <AssociationConnector Association="FootballTransfersModel.FK_Users_Roles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FootballTransfersModel.sysdiagrams" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

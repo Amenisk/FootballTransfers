@@ -26,6 +26,8 @@ namespace FootballTransfers.ADOApp
         public int Characteristic_Id { get; set; }
         public int FootballClub_Id { get; set; }
         public byte[] Photo { get; set; }
+        public string Position { get; set; }
+        public string Nationality { get; set; }
     
         public virtual Characterics Characterics { get; set; }
         public virtual FootballClubs FootballClubs { get; set; }

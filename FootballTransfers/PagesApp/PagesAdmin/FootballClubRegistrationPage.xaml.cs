@@ -67,6 +67,8 @@ namespace FootballTransfers.PageApp.PagesAdmin
 
                 App.Connection.FootballClubs.Add(newFootballClub);
                 App.Connection.SaveChanges();
+                ClearForm();
+                MessageBox.Show("Club is registered!");
             }
             else
             {
@@ -77,6 +79,14 @@ namespace FootballTransfers.PageApp.PagesAdmin
         private bool CheckNumber(string s)
         {
             return int.TryParse(s, out var number) && number >= 0;
+        }
+
+        private void ClearForm()
+        {
+            tbName.Text = "";
+            tbBudget.Text = "";
+            _logo = null;
+            btnSelectLogo.Background = Brushes.LightGray;
         }
     }
 }

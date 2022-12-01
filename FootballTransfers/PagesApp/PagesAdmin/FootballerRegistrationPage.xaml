@@ -5,13 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FootballTransfers.PageApp.PagesAdmin"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="585" d:DesignWidth="1040"
       Title="FootballerRegistrationPage">
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="20*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -19,13 +19,14 @@
             <RowDefinition/>
             <RowDefinition Height="0*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="3" Height="418" Margin="114,0,114,0">
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" Height="482" Margin="67,0,67,0" Grid.Column="1">
             <TextBlock>Full name</TextBlock>
             <TextBox x:Name="tbFullName"></TextBox>
-            <Button Click="SelectPhoto">Select photo</Button>
+            <Button x:Name="btnSelectPhoto" Click="SelectPhoto">Select photo</Button>
             <StackPanel>
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
@@ -58,6 +59,14 @@
                         <TextBlock>Physicality</TextBlock>
                         <TextBox x:Name="tbPhysicality"></TextBox>
                     </StackPanel>
+                    <StackPanel Grid.Row="3" Grid.Column="0">
+                        <TextBlock>Nationality</TextBlock>
+                        <TextBox x:Name="tbNationality"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Grid.Column="1">
+                        <TextBlock>Position</TextBlock>
+                        <ComboBox x:Name="cmbPosition"></ComboBox>
+                    </StackPanel>
                 </Grid>
             </StackPanel>
             <TextBlock x:Name="tbFootballClub">Football club</TextBlock>
@@ -72,7 +81,7 @@
             </ComboBox>
             <TextBlock>Transfer cost</TextBlock>
             <TextBox x:Name="tbTransferCost"></TextBox>
-            <Button Click="SaveFootballClub">Save football club</Button>
+            <Button Click="SaveFootballClub">Register footballer</Button>
         </StackPanel>
     </Grid>
 </Page>

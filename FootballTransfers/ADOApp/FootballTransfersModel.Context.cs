@@ -32,5 +32,6 @@ namespace FootballTransfers.ADOApp
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<TransfersHistory> TransfersHistory { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

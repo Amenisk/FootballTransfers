@@ -36,11 +36,11 @@ namespace FootballTransfers.Pages
         private void Registration(object sender, RoutedEventArgs e)
         {
             if (tbLogin.Text != "" && tbPassword.Text != "" 
-                && tbName.Text != "" && cmbRoles.SelectedItem != null)
+                && tbFullName.Text != "" && cmbRoles.SelectedItem != null)
             {
                 var newUser = new Users()
                 {
-                    FullName = tbName.Text,
+                    FullName = tbFullName.Text,
                     Role_Id = ((Roles) cmbRoles.SelectedItem).Role_Id
                 };
                 var newAccount = new Accounts
@@ -49,12 +49,12 @@ namespace FootballTransfers.Pages
                     Password = tbPassword.Text
                 };
 
-                if (((Roles) cmbRoles.SelectedItem).Name == "Coach")
+                if (((Roles) cmbRoles.SelectedItem).Role_Id == 2)
                 {
                     if(cmbClubs.SelectedItem != null)
                     {
                         newUser.FootballClub_Id = 
-                            ((FootballClubs)cmbRoles.SelectedItem).FootballClub_Id;
+                            ((FootballClubs)cmbClubs.SelectedItem).FootballClub_Id;
                     }
                     else
                     {
@@ -67,6 +67,7 @@ namespace FootballTransfers.Pages
                 App.Connection.Users.Add(newUser);
                 App.Connection.Accounts.Add(newAccount);
                 App.Connection.SaveChanges();
+                ClearForm();
                 MessageBox.Show("Registration success!");
             }
             else
@@ -78,7 +79,7 @@ namespace FootballTransfers.Pages
 
         private void Selection(object sender, SelectionChangedEventArgs e)
         {
-            if (((Roles)cmbRoles.SelectedItem).Role_Id == 2)
+            if (cmbRoles.SelectedItem != null && ((Roles)cmbRoles.SelectedItem).Role_Id == 2)
             {
                 tbFootballClub.Visibility = Visibility.Visible;
                 cmbClubs.Visibility = Visibility.Visible;
@@ -88,6 +89,15 @@ namespace FootballTransfers.Pages
                 tbFootballClub.Visibility = Visibility.Hidden;
                 cmbClubs.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void ClearForm()
+        {
+            tbFullName.Text = "";
+            tbLogin.Text = "";
+            tbPassword.Text = "";
+            cmbRoles.SelectedItem = null;
+            cmbClubs.SelectedItem = null;
         }
     }
 }
