@@ -11,10 +11,10 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.TextFormatting;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FootballTransfers.ADOApp;
-using FootballTransfers.PageApp.PagesCouch;
 using FootballTransfers.PagesApp.PagesCouch;
 
 namespace FootballTransfers.PagesApp.PagesCouch
@@ -24,6 +24,7 @@ namespace FootballTransfers.PagesApp.PagesCouch
     /// </summary>
     public partial class FootballClubsPage : Page
     {
+        private Random rnd = new Random();
         private Footballers _footballer;
         private FootballClubs _club;
         private int _points = 0;
@@ -47,21 +48,22 @@ namespace FootballTransfers.PagesApp.PagesCouch
             if (_footballer != null)
             {
                 DialogResult dialogResult = System.Windows.Forms.
-                MessageBox.Show("You confirm sale?", "Confirmation", MessageBoxButtons.YesNo);
+                MessageBox.Show($"You confirm sale? Amount including commission 7%: {Convert.ToInt32(1.07 * _footballer.TransferCost)}",
+                "Confirmation", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
                     if (((FootballClubs)lvClubs.SelectedItem).Budget >= _footballer.TransferCost)
                     {
-                        ((FootballClubs)lvClubs.SelectedItem).Budget -= _footballer.TransferCost;
+                        ((FootballClubs)lvClubs.SelectedItem).Budget -= Convert.ToInt32(1.07 * _footballer.TransferCost);
                         _club.Budget += _footballer.TransferCost;
 
                         TransfersHistory transfer = new TransfersHistory()
                         {
                             Footballer_Id = _footballer.Footballer_Id,
-                            Characteristic_Id = _footballer.Characterics.Characteristic_Id,
+                            Characteristic_Id = _footballer.Characteristics.Characteristic_Id,
                             ClubOfSale = _footballer.FootballClubs.FootballClub_Id,
                             ClubOfPurchase = ((FootballClubs)lvClubs.SelectedItem).FootballClub_Id,
-                            TransferCost = _footballer.TransferCost,
+                            TransferCost = Convert.ToInt32(1.07 * _footballer.TransferCost),
                             DateAndTime = DateTime.Now
                         };
 
@@ -88,40 +90,50 @@ namespace FootballTransfers.PagesApp.PagesCouch
 
         private void ChangingCharacteristics()
         {
-            _footballer.Characterics.Pace
-                += Cnanging(_footballer.Characterics.Pace);
+            var characteristic = new Characteristics();
 
-            _footballer.Characterics.Shooting
-                += Cnanging(_footballer.Characterics.Shooting);
+            characteristic.Pace
+                = Cnanging(_footballer.Characteristics.Pace);
 
-            _footballer.Characterics.Passing
-                += Cnanging(_footballer.Characterics.Passing);
+            characteristic.Shooting
+                = Cnanging(_footballer.Characteristics.Shooting);
 
-            _footballer.Characterics.Dribbling
-                += Cnanging(_footballer.Characterics.Dribbling);
+            characteristic.Passing
+                = Cnanging(_footballer.Characteristics.Passing);
 
-            _footballer.Characterics.Deffending
-               += Cnanging(_footballer.Characterics.Deffending);
+            characteristic.Dribbling
+                = Cnanging(_footballer.Characteristics.Dribbling);
 
-            _footballer.Characterics.Physicality
-               += Cnanging(_footballer.Characterics.Physicality);
+            characteristic.Deffending
+               = Cnanging(_footballer.Characteristics.Deffending);
 
-            _footballer.TransferCost += _points * 100000;
+            characteristic.Physicality
+               = Cnanging(_footballer.Characteristics.Physicality);
+
+            _footballer.Characteristics = characteristic;
+
+            if (_footballer.TransferCost + _points * 20000 > 0)
+            {
+                _footballer.TransferCost += _points * 20000;
+            }
+            else
+            {
+                _footballer.TransferCost = 0;
+            }
+            
             _points = 0;
         }
 
         private int Cnanging(int points)
         {
-            Random rnd = new Random();
             int p = rnd.Next(-3, 4);
 
             if(points + p > 99)
                 p = 0;
-            
             else
                 _points += p;
 
-            return p;
+            return p + points;
         }
 
         private void Back(object sender, RoutedEventArgs e)

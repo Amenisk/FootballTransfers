@@ -14,9 +14,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FootballTransfers.ADOApp;
+using FootballTransfers.PagesApp;
 using FootballTransfers.PagesApp.PagesCouch;
 
-namespace FootballTransfers.PageApp.PagesCouch
+namespace FootballTransfers.PagesApp.PagesCouch
 {
     /// <summary>
     /// Логика взаимодействия для MainCouchPage.xaml
@@ -75,6 +76,16 @@ namespace FootballTransfers.PageApp.PagesCouch
             {
                 MessageBox.Show("Choose footballer!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void LogOut(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AuthorizationPage());
+        }
+
+        private void GetListOfTransfers(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new FootballClubTransfersPage(_couch));
         }
     }
 

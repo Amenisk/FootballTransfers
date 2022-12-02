@@ -1,9 +1,9 @@
-﻿<Page x:Class="FootballTransfers.PageApp.PagesAdmin.FootballClubRegistrationPage"
+﻿<Page x:Class="FootballTransfers.PagesApp.PagesAdmin.FootballClubRegistrationPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FootballTransfers.PageApp.PagesAdmin"
+      xmlns:local="clr-namespace:FootballTransfers.PagesApp.PagesAdmin"
       mc:Ignorable="d" 
       d:DesignHeight="585" d:DesignWidth="1040"
       Title="FootballClubRegistrationPage">
@@ -19,13 +19,16 @@
             <RowDefinition Height="5*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
+            <Button Click="Back" Width="100" Margin="5" Cursor="Hand">Back</Button>
+        </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
             <TextBlock>Name</TextBlock>
             <TextBox x:Name="tbName"></TextBox>
             <TextBlock>Budget</TextBlock>
             <TextBox x:Name="tbBudget"></TextBox>
-            <Button x:Name="btnSelectLogo" Click="SelectLogo">Select logo</Button>
-            <Button Click="SaveFootballClub">Register fotball club</Button>
+            <Button x:Name="btnSelectLogo" Click="SelectLogo" Margin="5">Select logo</Button>
+            <Button Click="SaveFootballClub" Margin="5" Cursor="Hand">Register fotball club</Button>
         </StackPanel>
     </Grid>
 </Page>

@@ -1,9 +1,10 @@
-﻿<Page x:Class="FootballTransfers.Pages.AuthorizationPage"
+﻿<Page x:Class="FootballTransfers.PagesApp.AuthorizationPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FootballTransfers.Pages"
+      xmlns:local="clr-namespace:FootballTransfers.PagesApp"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="585" d:DesignWidth="1040"
       Title="AuthorizationPage">
@@ -26,8 +27,8 @@
 
             <TextBlock>Password</TextBlock>
             <PasswordBox x:Name="pbPassword" Height="30" Margin="5" VerticalContentAlignment="Center"></PasswordBox>
-            <Button Height="30" Click="Authorization">Sign in</Button>
-            <Button Height="30" Click="RegistrationNavigate">Registration</Button>
+            <Button Height="30" Click="Authorization" Margin="5">Sign in</Button>
+            <Button Height="30" Click="RegistrationNavigate" Margin="5" Cursor="Hand">Registration</Button>
         </StackPanel>
     </Grid>
 </Page>

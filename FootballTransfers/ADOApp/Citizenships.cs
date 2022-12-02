@@ -12,21 +12,16 @@ namespace FootballTransfers.ADOApp
     using System;
     using System.Collections.Generic;
     
-    public partial class Characterics
+    public partial class Citizenships
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Characterics()
+        public Citizenships()
         {
             this.Footballers = new HashSet<Footballers>();
         }
     
-        public int Characteristic_Id { get; set; }
-        public int Pace { get; set; }
-        public int Shooting { get; set; }
-        public int Passing { get; set; }
-        public int Dribbling { get; set; }
-        public int Deffending { get; set; }
-        public int Physicality { get; set; }
+        public int Citizenship_Id { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Footballers> Footballers { get; set; }

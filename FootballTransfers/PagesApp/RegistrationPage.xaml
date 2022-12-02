@@ -1,9 +1,9 @@
-﻿<Page x:Class="FootballTransfers.Pages.RegistrationPage"
+﻿<Page x:Class="FootballTransfers.PagesApp.RegistrationPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FootballTransfers.Pages"
+      xmlns:local="clr-namespace:FootballTransfers.PagesApp"
       mc:Ignorable="d" 
       d:DesignHeight="585" d:DesignWidth="1040"
       Title="RegistrationPage">
@@ -51,8 +51,8 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <Button Height="30" Click="Reverse">Reverse</Button>
-            <Button Height="30" Click="Registration">Registration</Button>
+            <Button Height="30" Click="Reverse" Margin="5">Reverse</Button>
+            <Button Height="30" Click="Registration" Margin="5" Cursor="Hand">Registration</Button>
         </StackPanel>
     </Grid>
 </Page>

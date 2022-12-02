@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FootballTransfers.ADOApp;
-using FootballTransfers.PageApp.PagesCouch;
+using FootballTransfers.PagesApp.PagesCouch;
 
 namespace FootballTransfers.PagesApp.PagesCouch
 {
@@ -24,7 +24,7 @@ namespace FootballTransfers.PagesApp.PagesCouch
     /// </summary>
     public partial class FootballerCardPage : Page
     {
-
+        private Random rnd = new Random();
         private Footballers _footballer;
         private FootballClubs _club;
         private FootballClubs _clubOfSale;
@@ -35,17 +35,17 @@ namespace FootballTransfers.PagesApp.PagesCouch
             InitializeComponent();
             imgPhoto.Source = BytesToImage(footballer.Photo);
             tbFullName.Text += footballer.FullName;
-            tbPosition.Text += footballer.Position;
+            tbPosition.Text += footballer.Positions.Name;
             tbTransferCost.Text += footballer.TransferCost.ToString();
             tbFootballClub.Text += App.Connection.FootballClubs.
                 FirstOrDefault(x => x.FootballClub_Id == footballer.FootballClub_Id).Name;
-            tbNationally.Text += footballer.Nationality;
-            tbPace.Text += footballer.Characterics.Pace;
-            tbShooting.Text += footballer.Characterics.Shooting;
-            tbPassing.Text += footballer.Characterics.Passing;
-            tbDribbling.Text += footballer.Characterics.Dribbling;
-            tbDeffending.Text += footballer.Characterics.Deffending;
-            tbPhysicality.Text += footballer.Characterics.Physicality;
+            tbNationally.Text += footballer.Citizenships.Name;
+            tbPace.Text += footballer.Characteristics.Pace;
+            tbShooting.Text += footballer.Characteristics.Shooting;
+            tbPassing.Text += footballer.Characteristics.Passing;
+            tbDribbling.Text += footballer.Characteristics.Dribbling;
+            tbDeffending.Text += footballer.Characteristics.Deffending;
+            tbPhysicality.Text += footballer.Characteristics.Physicality;
 
             _footballer = footballer;
         }
@@ -77,21 +77,22 @@ namespace FootballTransfers.PagesApp.PagesCouch
         private void BuyFootballer(object sender, RoutedEventArgs e)
         {
             DialogResult dialogResult = System.Windows.Forms.
-                MessageBox.Show("You confirm purchase?", "Confirmation", MessageBoxButtons.YesNo);
+                MessageBox.Show($"You confirm purchase? Amount including commission 7%: {Convert.ToInt32(1.07 * _footballer.TransferCost)}", 
+                "Confirmation", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 if (_club.Budget >= _footballer.TransferCost)
                 {
                     _clubOfSale.Budget += _footballer.TransferCost;
-                    _club.Budget -= _footballer.TransferCost;
+                    _club.Budget -= Convert.ToInt32(1.07 * _footballer.TransferCost);
 
                     TransfersHistory transfer = new TransfersHistory()
                     {
                         Footballer_Id = _footballer.Footballer_Id,
-                        Characteristic_Id = _footballer.Characterics.Characteristic_Id,
+                        Characteristic_Id = _footballer.Characteristics.Characteristic_Id,
                         ClubOfSale = _clubOfSale.FootballClub_Id,
                         ClubOfPurchase = _club.FootballClub_Id,
-                        TransferCost = _footballer.TransferCost,
+                        TransferCost = Convert.ToInt32(1.07 * _footballer.TransferCost),
                         DateAndTime = DateTime.Now
                     };
 
@@ -113,31 +114,42 @@ namespace FootballTransfers.PagesApp.PagesCouch
 
         private void ChangingCharacteristics()
         {
-            _footballer.Characterics.Pace
-                += Cnanging(_footballer.Characterics.Pace);
+            var characteristic = new Characteristics();
 
-            _footballer.Characterics.Shooting
-                += Cnanging(_footballer.Characterics.Shooting);
+            characteristic.Pace
+                += Cnanging(_footballer.Characteristics.Pace);
 
-            _footballer.Characterics.Passing
-                += Cnanging(_footballer.Characterics.Passing);
+            characteristic.Shooting
+                += Cnanging(_footballer.Characteristics.Shooting);
 
-            _footballer.Characterics.Dribbling
-                += Cnanging(_footballer.Characterics.Dribbling);
+            characteristic.Passing
+                += Cnanging(_footballer.Characteristics.Passing);
 
-            _footballer.Characterics.Deffending
-               += Cnanging(_footballer.Characterics.Deffending);
+            characteristic.Dribbling
+                += Cnanging(_footballer.Characteristics.Dribbling);
 
-            _footballer.Characterics.Physicality
-               += Cnanging(_footballer.Characterics.Physicality);
+            characteristic.Deffending
+               += Cnanging(_footballer.Characteristics.Deffending);
 
-            _footballer.TransferCost += _points * 100000;
+            characteristic.Physicality
+               += Cnanging(_footballer.Characteristics.Physicality);
+
+            _footballer.Characteristics = characteristic;
+
+
+            if (_footballer.TransferCost + _points * 20000 > 0)
+            {
+                _footballer.TransferCost += _points * 20000;
+            }
+            else
+            {
+                _footballer.TransferCost = 0;
+            }
             _points = 0;
         }
 
         private int Cnanging(int points)
         {
-            Random rnd = new Random();
             int p = rnd.Next(-3, 4);
 
             if (points + p > 99)
@@ -146,7 +158,7 @@ namespace FootballTransfers.PagesApp.PagesCouch
             else
                 _points += p;
 
-            return p;
+            return p + points;
         }
 
         private void Back(object sender, RoutedEventArgs e)
@@ -159,6 +171,18 @@ namespace FootballTransfers.PagesApp.PagesCouch
             {
                 NavigationService.Navigate(new MainCouchPage(App.Connection.Users.FirstOrDefault
                     (x => x.FootballClub_Id == _footballer.FootballClub_Id)));
+            }
+        }
+
+        private void GetTransferInfo(object sender, RoutedEventArgs e)
+        {
+            if(_club != null)
+            {
+                NavigationService.Navigate(new FootballerTransfersPage(_club, _clubOfSale, _footballer));
+            }
+            else
+            {
+                NavigationService.Navigate(new FootballerTransfersPage(_footballer));
             }
         }
     }

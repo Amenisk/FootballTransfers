@@ -12,9 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using FootballTransfers.PageApp.PagesAdmin;
 
-namespace FootballTransfers.PageApp.PagesAdmin
+namespace FootballTransfers.PagesApp.PagesAdmin
 {
     /// <summary>
     /// Логика взаимодействия для MainAdminPage.xaml
@@ -34,6 +33,11 @@ namespace FootballTransfers.PageApp.PagesAdmin
         private void RegisterFootballer(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new FootballerRegistrationPage());
+        }
+
+        private void LogOut(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AuthorizationPage());
         }
     }
 }

@@ -14,7 +14,7 @@
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="User_Id" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Characterics">
+        <EntityType Name="Characteristics">
           <Key>
             <PropertyRef Name="Characteristic_Id" />
           </Key>
@@ -25,6 +25,13 @@
           <Property Name="Dribbling" Type="int" Nullable="false" />
           <Property Name="Deffending" Type="int" Nullable="false" />
           <Property Name="Physicality" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Citizenships">
+          <Key>
+            <PropertyRef Name="Citizenship_Id" />
+          </Key>
+          <Property Name="Citizenship_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="FootballClubs">
           <Key>
@@ -45,8 +52,15 @@
           <Property Name="Characteristic_Id" Type="int" Nullable="false" />
           <Property Name="FootballClub_Id" Type="int" Nullable="false" />
           <Property Name="Photo" Type="image" Nullable="false" />
-          <Property Name="Position" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Nationality" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Position_Id" Type="int" Nullable="false" />
+          <Property Name="Citizenship_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="Position_Id" />
+          </Key>
+          <Property Name="Position_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="25" Nullable="false" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -99,10 +113,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Footballers_Characterics">
-          <End Role="Characterics" Type="Self.Characterics" Multiplicity="1" />
+          <End Role="Characteristics" Type="Self.Characteristics" Multiplicity="1" />
           <End Role="Footballers" Type="Self.Footballers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Characterics">
+            <Principal Role="Characteristics">
               <PropertyRef Name="Characteristic_Id" />
             </Principal>
             <Dependent Role="Footballers">
@@ -119,6 +133,42 @@
             </Principal>
             <Dependent Role="Footballers">
               <PropertyRef Name="FootballClub_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Footballers_Nationalities">
+          <End Role="Citizenships" Type="Self.Citizenships" Multiplicity="1" />
+          <End Role="Footballers" Type="Self.Footballers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Citizenships">
+              <PropertyRef Name="Citizenship_Id" />
+            </Principal>
+            <Dependent Role="Footballers">
+              <PropertyRef Name="Citizenship_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Footballers_Positions">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Footballers" Type="Self.Footballers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="Position_Id" />
+            </Principal>
+            <Dependent Role="Footballers">
+              <PropertyRef Name="Position_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransfersHistory_Characteristics">
+          <End Role="Characteristics" Type="Self.Characteristics" Multiplicity="1" />
+          <End Role="TransfersHistory" Type="Self.TransfersHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Characteristics">
+              <PropertyRef Name="Characteristic_Id" />
+            </Principal>
+            <Dependent Role="TransfersHistory">
+              <PropertyRef Name="Characteristic_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -184,9 +234,11 @@
         </Association>
         <EntityContainer Name="Хранилище FootballTransfersModelContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Characterics" EntityType="Self.Characterics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Characteristics" EntityType="Self.Characteristics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Citizenships" EntityType="Self.Citizenships" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FootballClubs" EntityType="Self.FootballClubs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Footballers" EntityType="Self.Footballers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransfersHistory" EntityType="Self.TransfersHistory" Schema="dbo" store:Type="Tables" />
@@ -196,12 +248,24 @@
             <End Role="Accounts" EntitySet="Accounts" />
           </AssociationSet>
           <AssociationSet Name="FK_Footballers_Characterics" Association="Self.FK_Footballers_Characterics">
-            <End Role="Characterics" EntitySet="Characterics" />
+            <End Role="Characteristics" EntitySet="Characteristics" />
             <End Role="Footballers" EntitySet="Footballers" />
           </AssociationSet>
           <AssociationSet Name="FK_Footballers_FootballClub" Association="Self.FK_Footballers_FootballClub">
             <End Role="FootballClubs" EntitySet="FootballClubs" />
             <End Role="Footballers" EntitySet="Footballers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Footballers_Nationalities" Association="Self.FK_Footballers_Nationalities">
+            <End Role="Citizenships" EntitySet="Citizenships" />
+            <End Role="Footballers" EntitySet="Footballers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Footballers_Positions" Association="Self.FK_Footballers_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Footballers" EntitySet="Footballers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransfersHistory_Characteristics" Association="Self.FK_TransfersHistory_Characteristics">
+            <End Role="Characteristics" EntitySet="Characteristics" />
+            <End Role="TransfersHistory" EntitySet="TransfersHistory" />
           </AssociationSet>
           <AssociationSet Name="FK_TransfersHistory_FootballClub" Association="Self.FK_TransfersHistory_FootballClub">
             <End Role="FootballClubs" EntitySet="FootballClubs" />
@@ -238,18 +302,13 @@
           <Property Name="User_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Accounts_Users" FromRole="Accounts" ToRole="Users" />
         </EntityType>
-        <EntityType Name="Characterics">
+        <EntityType Name="Citizenships">
           <Key>
-            <PropertyRef Name="Characteristic_Id" />
+            <PropertyRef Name="Citizenship_Id" />
           </Key>
-          <Property Name="Characteristic_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Pace" Type="Int32" Nullable="false" />
-          <Property Name="Shooting" Type="Int32" Nullable="false" />
-          <Property Name="Passing" Type="Int32" Nullable="false" />
-          <Property Name="Dribbling" Type="Int32" Nullable="false" />
-          <Property Name="Deffending" Type="Int32" Nullable="false" />
-          <Property Name="Physicality" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Footballers" Relationship="Self.FK_Footballers_Characterics" FromRole="Characterics" ToRole="Footballers" />
+          <Property Name="Citizenship_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Footballers" Relationship="Self.FK_Footballers_Nationalities" FromRole="Citizenships" ToRole="Footballers" />
         </EntityType>
         <EntityType Name="FootballClubs">
           <Key>
@@ -274,11 +333,21 @@
           <Property Name="Characteristic_Id" Type="Int32" Nullable="false" />
           <Property Name="FootballClub_Id" Type="Int32" Nullable="false" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <NavigationProperty Name="Characterics" Relationship="Self.FK_Footballers_Characterics" FromRole="Footballers" ToRole="Characterics" />
+          <Property Name="Position_Id" Type="Int32" Nullable="false" />
+          <Property Name="Citizenship_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Citizenships" Relationship="Self.FK_Footballers_Nationalities" FromRole="Footballers" ToRole="Citizenships" />
           <NavigationProperty Name="FootballClubs" Relationship="Self.FK_Footballers_FootballClub" FromRole="Footballers" ToRole="FootballClubs" />
+          <NavigationProperty Name="Positions" Relationship="Self.FK_Footballers_Positions" FromRole="Footballers" ToRole="Positions" />
           <NavigationProperty Name="TransfersHistory" Relationship="Self.FK_TransfersHistory_Footballers" FromRole="Footballers" ToRole="TransfersHistory" />
-          <Property Name="Position" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Nationality" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Characteristics" Relationship="FootballTransfersModel.FK_Footballers_Characterics1" FromRole="Footballers" ToRole="Characteristics" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="Position_Id" />
+          </Key>
+          <Property Name="Position_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Footballers" Relationship="Self.FK_Footballers_Positions" FromRole="Positions" ToRole="Footballers" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -287,6 +356,16 @@
           <Property Name="Role_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TransfersHistory">
           <Key>
@@ -302,6 +381,7 @@
           <NavigationProperty Name="FootballClubs" Relationship="Self.FK_TransfersHistory_FootballClub" FromRole="TransfersHistory" ToRole="FootballClubs" />
           <NavigationProperty Name="FootballClubs1" Relationship="Self.FK_TransfersHistory_FootballClub1" FromRole="TransfersHistory" ToRole="FootballClubs" />
           <NavigationProperty Name="Footballers" Relationship="Self.FK_TransfersHistory_Footballers" FromRole="TransfersHistory" ToRole="Footballers" />
+          <NavigationProperty Name="Characteristics" Relationship="FootballTransfersModel.FK_TransfersHistory_Characteristics" FromRole="TransfersHistory" ToRole="Characteristics" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -327,15 +407,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Footballers_Characterics">
-          <End Role="Characterics" Type="Self.Characterics" Multiplicity="1" />
+        <Association Name="FK_Footballers_Nationalities">
+          <End Role="Citizenships" Type="Self.Citizenships" Multiplicity="1" />
           <End Role="Footballers" Type="Self.Footballers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Characterics">
-              <PropertyRef Name="Characteristic_Id" />
+            <Principal Role="Citizenships">
+              <PropertyRef Name="Citizenship_Id" />
             </Principal>
             <Dependent Role="Footballers">
-              <PropertyRef Name="Characteristic_Id" />
+              <PropertyRef Name="Citizenship_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -387,6 +467,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Footballers_Positions">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Footballers" Type="Self.Footballers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="Position_Id" />
+            </Principal>
+            <Dependent Role="Footballers">
+              <PropertyRef Name="Position_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TransfersHistory_Footballers">
           <End Role="Footballers" Type="Self.Footballers" Multiplicity="1" />
           <End Role="TransfersHistory" Type="Self.TransfersHistory" Multiplicity="*" />
@@ -413,18 +505,20 @@
         </Association>
         <EntityContainer Name="FootballTransfersEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" />
-          <EntitySet Name="Characterics" EntityType="Self.Characterics" />
+          <EntitySet Name="Citizenships" EntityType="Self.Citizenships" />
           <EntitySet Name="FootballClubs" EntityType="Self.FootballClubs" />
           <EntitySet Name="Footballers" EntityType="Self.Footballers" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TransfersHistory" EntityType="Self.TransfersHistory" />
           <EntitySet Name="Users" EntityType="Self.Users" />
           <AssociationSet Name="FK_Accounts_Users" Association="Self.FK_Accounts_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Accounts" EntitySet="Accounts" />
           </AssociationSet>
-          <AssociationSet Name="FK_Footballers_Characterics" Association="Self.FK_Footballers_Characterics">
-            <End Role="Characterics" EntitySet="Characterics" />
+          <AssociationSet Name="FK_Footballers_Nationalities" Association="Self.FK_Footballers_Nationalities">
+            <End Role="Citizenships" EntitySet="Citizenships" />
             <End Role="Footballers" EntitySet="Footballers" />
           </AssociationSet>
           <AssociationSet Name="FK_Footballers_FootballClub" Association="Self.FK_Footballers_FootballClub">
@@ -443,6 +537,10 @@
             <End Role="FootballClubs" EntitySet="FootballClubs" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <AssociationSet Name="FK_Footballers_Positions" Association="Self.FK_Footballers_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Footballers" EntitySet="Footballers" />
+          </AssociationSet>
           <AssociationSet Name="FK_TransfersHistory_Footballers" Association="Self.FK_TransfersHistory_Footballers">
             <End Role="Footballers" EntitySet="Footballers" />
             <End Role="TransfersHistory" EntitySet="TransfersHistory" />
@@ -451,18 +549,54 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <EntitySet Name="sysdiagrams" EntityType="FootballTransfersModel.sysdiagrams" />
+          <EntitySet Name="Characteristics" EntityType="FootballTransfersModel.Characteristics" />
+          <AssociationSet Name="FK_Footballers_Characterics1" Association="FootballTransfersModel.FK_Footballers_Characterics1">
+            <End Role="Characteristics" EntitySet="Characteristics" />
+            <End Role="Footballers" EntitySet="Footballers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransfersHistory_Characteristics" Association="FootballTransfersModel.FK_TransfersHistory_Characteristics">
+            <End Role="Characteristics" EntitySet="Characteristics" />
+            <End Role="TransfersHistory" EntitySet="TransfersHistory" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="sysdiagrams">
+        <EntityType Name="Characteristics">
           <Key>
-            <PropertyRef Name="diagram_id" />
+            <PropertyRef Name="Characteristic_Id" />
           </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Characteristic_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pace" Type="Int32" Nullable="false" />
+          <Property Name="Shooting" Type="Int32" Nullable="false" />
+          <Property Name="Passing" Type="Int32" Nullable="false" />
+          <Property Name="Dribbling" Type="Int32" Nullable="false" />
+          <Property Name="Deffending" Type="Int32" Nullable="false" />
+          <Property Name="Physicality" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Footballers" Relationship="FootballTransfersModel.FK_Footballers_Characterics1" FromRole="Characteristics" ToRole="Footballers" />
+          <NavigationProperty Name="TransfersHistory" Relationship="FootballTransfersModel.FK_TransfersHistory_Characteristics" FromRole="Characteristics" ToRole="TransfersHistory" />
         </EntityType>
+        <Association Name="FK_Footballers_Characterics1">
+          <End Type="FootballTransfersModel.Characteristics" Role="Characteristics" Multiplicity="1" />
+          <End Type="FootballTransfersModel.Footballers" Role="Footballers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Characteristics">
+              <PropertyRef Name="Characteristic_Id" />
+            </Principal>
+            <Dependent Role="Footballers">
+              <PropertyRef Name="Characteristic_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransfersHistory_Characteristics">
+          <End Type="FootballTransfersModel.Characteristics" Role="Characteristics" Multiplicity="1" />
+          <End Type="FootballTransfersModel.TransfersHistory" Role="TransfersHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Characteristics">
+              <PropertyRef Name="Characteristic_Id" />
+            </Principal>
+            <Dependent Role="TransfersHistory">
+              <PropertyRef Name="Characteristic_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -479,16 +613,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Characterics">
-            <EntityTypeMapping TypeName="FootballTransfersModel.Characterics">
-              <MappingFragment StoreEntitySet="Characterics">
-                <ScalarProperty Name="Characteristic_Id" ColumnName="Characteristic_Id" />
-                <ScalarProperty Name="Pace" ColumnName="Pace" />
-                <ScalarProperty Name="Shooting" ColumnName="Shooting" />
-                <ScalarProperty Name="Passing" ColumnName="Passing" />
-                <ScalarProperty Name="Dribbling" ColumnName="Dribbling" />
-                <ScalarProperty Name="Deffending" ColumnName="Deffending" />
-                <ScalarProperty Name="Physicality" ColumnName="Physicality" />
+          <EntitySetMapping Name="Citizenships">
+            <EntityTypeMapping TypeName="FootballTransfersModel.Citizenships">
+              <MappingFragment StoreEntitySet="Citizenships">
+                <ScalarProperty Name="Citizenship_Id" ColumnName="Citizenship_Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -505,14 +634,22 @@
           <EntitySetMapping Name="Footballers">
             <EntityTypeMapping TypeName="FootballTransfersModel.Footballers">
               <MappingFragment StoreEntitySet="Footballers">
-                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="Footballer_Id" ColumnName="Footballer_Id" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="TransferCost" ColumnName="TransferCost" />
                 <ScalarProperty Name="Characteristic_Id" ColumnName="Characteristic_Id" />
                 <ScalarProperty Name="FootballClub_Id" ColumnName="FootballClub_Id" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Position_Id" ColumnName="Position_Id" />
+                <ScalarProperty Name="Citizenship_Id" ColumnName="Citizenship_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="FootballTransfersModel.Positions">
+              <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="Position_Id" ColumnName="Position_Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -521,6 +658,17 @@
               <MappingFragment StoreEntitySet="Roles">
                 <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FootballTransfersModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -547,14 +695,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="FootballTransfersModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
+          <EntitySetMapping Name="Characteristics">
+            <EntityTypeMapping TypeName="FootballTransfersModel.Characteristics">
+              <MappingFragment StoreEntitySet="Characteristics">
+                <ScalarProperty Name="Physicality" ColumnName="Physicality" />
+                <ScalarProperty Name="Deffending" ColumnName="Deffending" />
+                <ScalarProperty Name="Dribbling" ColumnName="Dribbling" />
+                <ScalarProperty Name="Passing" ColumnName="Passing" />
+                <ScalarProperty Name="Shooting" ColumnName="Shooting" />
+                <ScalarProperty Name="Pace" ColumnName="Pace" />
+                <ScalarProperty Name="Characteristic_Id" ColumnName="Characteristic_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

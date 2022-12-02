@@ -1,6 +1,6 @@
-﻿using FootballTransfers.ADOApp;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,34 +13,34 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.IO;
+using FootballTransfers.ADOApp;
 
 namespace FootballTransfers.PagesApp.PagesCouch
 {
     /// <summary>
-    /// Логика взаимодействия для FootballersPage.xaml
+    /// Логика взаимодействия для FootballClubTransfersPage.xaml
     /// </summary>
-    public partial class FootballersPage : Page
+    public partial class FootballClubTransfersPage : Page
     {
+        private Users _couch;
         private FootballClubs _club;
-        private FootballClubs _clubOfSale;
-     
-        public FootballersPage(FootballClubs club, FootballClubs clubOfSale)
+        public FootballClubTransfersPage(Users couch)
         {
             InitializeComponent();
-            lvFootballers.ItemsSource = App.Connection.Footballers.Where
-                (x => x.FootballClub_Id == clubOfSale.FootballClub_Id).ToList();
-            tbNameOfClub.Text = clubOfSale.Name;
-            imgLogo.Source = BytesToImage(clubOfSale.Logo);
-            _club = club;
-            _clubOfSale = clubOfSale;
+            _couch = couch;
+            _club = App.Connection.FootballClubs.FirstOrDefault
+                (x => x.FootballClub_Id == _couch.FootballClub_Id);
+            tbNameOfClub.Text = _club.Name;
+            imgLogo.Source = BytesToImage(_club.Logo);
+            lvTransfers.ItemsSource = App.Connection.TransfersHistory.
+                Where(x => x.ClubOfPurchase == _club.FootballClub_Id 
+                || x.ClubOfSale == _club.FootballClub_Id).ToList();
         }
 
-        private void GetFootballerCard(object sender, SelectionChangedEventArgs e)
+        private void Back(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new FootballerCardPage(_club, _clubOfSale, (Footballers)lvFootballers.SelectedItem));
+            NavigationService.Navigate(new MainCouchPage(_couch));
         }
-
         private BitmapImage BytesToImage(byte[] bytes)
         {
             using (MemoryStream memoryStream = new MemoryStream(bytes))
@@ -52,11 +52,6 @@ namespace FootballTransfers.PagesApp.PagesCouch
                 image.EndInit();
                 return image;
             }
-        }
-
-        private void Back(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new FootballClubsPage(_club));
         }
     }
 }

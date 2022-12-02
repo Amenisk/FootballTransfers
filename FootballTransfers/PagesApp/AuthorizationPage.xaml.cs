@@ -12,10 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using FootballTransfers.PageApp.PagesAdmin;
-using FootballTransfers.PageApp.PagesCouch;
+using FootballTransfers.PagesApp.PagesAdmin;
+using FootballTransfers.PagesApp.PagesCouch;
 
-namespace FootballTransfers.Pages
+namespace FootballTransfers.PagesApp
 {
     /// <summary>
     /// Логика взаимодействия для AuthorizationPage.xaml

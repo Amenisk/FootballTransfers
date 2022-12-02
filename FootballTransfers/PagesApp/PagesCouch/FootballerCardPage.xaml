@@ -11,7 +11,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -29,36 +29,40 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Column="0" Grid.Row="0">
-                    <Image x:Name="imgPhoto" Width="200" VerticalAlignment="Center" Margin="10"></Image>
-                </StackPanel>
-                <StackPanel Grid.Column="0" Grid.Row="1">
-                    <Button x:Name="btnBuy" Visibility="Hidden" Click="BuyFootballer">Buy</Button>
-                </StackPanel>
-                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock x:Name="tbFullName" Text="Full name: "></TextBlock>
-                    <TextBlock x:Name="tbPosition" Text="Position: "></TextBlock>
-                    <TextBlock x:Name="tbTransferCost" Text="Transfer cost: "></TextBlock>
-                    <TextBlock x:Name="tbFootballClub" Text="Football club: "></TextBlock>
-                    <TextBlock x:Name="tbNationally" Text="Nationallity: "></TextBlock>
-                    <TextBlock x:Name="tbPace" Text="Pace: "></TextBlock>
-                    <TextBlock x:Name="tbShooting" Text="Shooting: "></TextBlock>
-                    <TextBlock x:Name="tbPassing" Text="Passing: "></TextBlock>
-                    <TextBlock x:Name="tbDribbling" Text="Dribbling: "></TextBlock>
-                    <TextBlock x:Name="tbDeffending" Text="Deffending: "></TextBlock>
-                    <TextBlock x:Name="tbPhysicality" Text="Physicality: "></TextBlock>
+                <Border Grid.ColumnSpan="2" HorizontalAlignment="Center"  CornerRadius="6" BorderBrush="Green" Background="LightGreen" BorderThickness="2">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left">
+                            <Image x:Name="imgPhoto" Width="200" VerticalAlignment="Center" Margin="10"></Image>
+                        </StackPanel>
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
+                            <TextBlock x:Name="tbFullName" Text="Full name: " Margin="5"></TextBlock>
+                            <TextBlock x:Name="tbPosition" Text="Position: " Margin="5"></TextBlock>
+                            <TextBlock x:Name="tbTransferCost" Text="Transfer cost: " Margin="5"></TextBlock>
+                            <TextBlock x:Name="tbFootballClub" Text="Football club: " Margin="5"></TextBlock>
+                            <TextBlock x:Name="tbNationally" Text="Citizenship: " Margin="5"></TextBlock>
+                            <TextBlock x:Name="tbPace" Text="Pace: " Margin="5"></TextBlock>
+                            <TextBlock x:Name="tbShooting" Text="Shooting: " Margin="5"></TextBlock>
+                            <TextBlock x:Name="tbPassing" Text="Passing: " Margin="5"></TextBlock>
+                            <TextBlock x:Name="tbDribbling" Text="Dribbling: " Margin="5"></TextBlock>
+                            <TextBlock x:Name="tbDeffending" Text="Deffending: " Margin="5"></TextBlock>
+                            <TextBlock x:Name="tbPhysicality" Text="Physicality: " Margin="5"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <StackPanel Grid.Column="0" Grid.Row="1" >
+                    <Button x:Name="btnBuy" Width="100" Visibility="Hidden" Click="BuyFootballer" Margin="10" HorizontalAlignment="Right">Buy</Button>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Grid.Row="1">
-                    <Button Width="200">Transfers</Button>
+                    <Button Width="100" Click="GetTransferInfo" Margin="10" Cursor="Hand" HorizontalAlignment="Center">Transfers</Button>
                 </StackPanel>
             </Grid>
         </StackPanel>
-        <StackPanel Grid.Row="2" Grid.Column="0">
-            <TextBlock x:Name="tbBalance" Visibility="Hidden" HorizontalAlignment="Left">Budget</TextBlock>
+        <StackPanel Grid.Row="2" Grid.Column="0" Margin="5" VerticalAlignment="Bottom">
+            <TextBlock x:Name="tbBalance" Visibility="Hidden" HorizontalAlignment="Left" >Budget</TextBlock>
             <TextBlock x:Name="tbBalanceValue" Visibility="Hidden" HorizontalAlignment="Left"></TextBlock>
         </StackPanel>
-        <StackPanel Grid.Row="0" Grid.Column="2">
-            <Button Click="Back" Width="100">Back</Button>
+        <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
+            <Button Click="Back" Width="100" Margin="5">Back</Button>
         </StackPanel>
     </Grid>
 </Page>

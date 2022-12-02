@@ -16,7 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FootballTransfers.ADOApp;
 
-namespace FootballTransfers.PageApp.PagesAdmin
+namespace FootballTransfers.PagesApp.PagesAdmin
 {
     /// <summary>
     /// Логика взаимодействия для FootballerRegistrationPage.xaml
@@ -28,7 +28,8 @@ namespace FootballTransfers.PageApp.PagesAdmin
         public FootballerRegistrationPage()
         {
             InitializeComponent();
-            cmbPosition.ItemsSource = new List<string>() { "Goalkeeper", "Defender", "Halfback", "Forward" };
+            cmbPosition.ItemsSource = App.Connection.Positions.ToList();
+            cmbCitizenship.ItemsSource = App.Connection.Citizenships.ToList();
             cmbClubs.ItemsSource = App.Connection.FootballClubs.ToList();
         }
 
@@ -41,7 +42,7 @@ namespace FootballTransfers.PageApp.PagesAdmin
                 if (dialog.ShowDialog() != null)
                 {
                     _photo = File.ReadAllBytes(dialog.FileName);
-                    BtnSelect.Background = Brushes.Green;
+                    BtnSelect.Background = Brushes.Red;
                 }
             }
             catch
@@ -65,11 +66,11 @@ namespace FootballTransfers.PageApp.PagesAdmin
                     FullName = tbFullName.Text,
                     TransferCost = int.Parse(tbTransferCost.Text),
                     FootballClub_Id = ((FootballClubs) cmbClubs.SelectedItem).FootballClub_Id,
-                    Nationality = tbNationality.Text,
-                    Position = cmbPosition.SelectedItem.ToString()
+                    Citizenship_Id = ((Citizenships) cmbCitizenship.SelectedItem).Citizenship_Id,
+                    Position_Id = ((Positions) cmbPosition.SelectedItem).Position_Id
                 };
 
-                Characterics newCharacteristic = new Characterics()
+                Characteristics newCharacteristic = new Characteristics()
                 {
                     Pace = int.Parse(tbPace.Text),
                     Shooting = int.Parse(tbShooting.Text),
@@ -79,7 +80,7 @@ namespace FootballTransfers.PageApp.PagesAdmin
                     Physicality = int.Parse(tbPhysicality.Text)
                 };
                 newCharacteristic.Footballers.Add(newFootballer);
-                App.Connection.Characterics.Add(newCharacteristic);
+                App.Connection.Characteristics.Add(newCharacteristic);
                 App.Connection.Footballers.Add(newFootballer);
                 App.Connection.SaveChanges();
 
@@ -99,7 +100,7 @@ namespace FootballTransfers.PageApp.PagesAdmin
                 && cmbClubs.SelectedItem != null 
                 && tbPace.Text != "" && tbShooting.Text != "" && tbPassing.Text != "" 
                 && tbDribbling.Text != "" && tbDeffending.Text != "" && tbPhysicality.Text != "" 
-                && cmbPosition.SelectionBoxItem != null && tbNationality.Text != "";
+                && cmbPosition.SelectionBoxItem != null && cmbCitizenship.SelectedItem != null;
         }
         private bool CheckNumber(string s)
         {
@@ -173,11 +174,14 @@ namespace FootballTransfers.PageApp.PagesAdmin
             tbDeffending.Text = "";
             tbPhysicality.Text = "";
             tbTransferCost.Text = "";
-            tbNationality.Text = "";
+            cmbCitizenship.SelectedItem = null;
             cmbPosition.SelectedItem = null;
-            btnSelectPhoto.Background = Brushes.LightGray;
+            btnSelectPhoto.Background = Brushes.Green;
         }
 
-
+        private void Back(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MainAdminPage());
+        }
     }
 }

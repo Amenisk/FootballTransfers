@@ -16,26 +16,30 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock FontSize="32" HorizontalAlignment="Right" Grid.Column="0">Choose football club</TextBlock>
-                <Button HorizontalAlignment="Right" Width="100" Grid.Column="1" Click="Back">Back</Button>
+                <Button HorizontalAlignment="Right" Width="100" Grid.Column="1" Click="Back" Margin="5" Cursor="Hand">Back</Button>
             </Grid>
-            <ListView x:Name="lvClubs" SelectionChanged="SellFootballer">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="7">
-                        </UniformGrid>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <Image Source="{Binding Logo}" Width="130"></Image>
-                            <TextBlock Text="{Binding Name}" HorizontalAlignment="Center"></TextBlock>
-                            <TextBlock HorizontalAlignment="Center">Budget</TextBlock>
-                            <TextBlock Text="{Binding Budget}" HorizontalAlignment="Center"></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <ScrollViewer>
+                <StackPanel>
+                    <ListView x:Name="lvClubs" SelectionChanged="SellFootballer">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="7">
+                                </UniformGrid>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Image Source="{Binding Logo}" Width="130"></Image>
+                                    <TextBlock Text="{Binding Name}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock HorizontalAlignment="Center">Budget</TextBlock>
+                                    <TextBlock Text="{Binding Budget}" HorizontalAlignment="Center"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </ScrollViewer>
         </StackPanel>
     </Grid>
 </Page>

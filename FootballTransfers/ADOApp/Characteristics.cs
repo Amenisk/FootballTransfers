@@ -12,28 +12,26 @@ namespace FootballTransfers.ADOApp
     using System;
     using System.Collections.Generic;
     
-    public partial class Footballers
+    public partial class Characteristics
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Footballers()
+        public Characteristics()
         {
+            this.Footballers = new HashSet<Footballers>();
             this.TransfersHistory = new HashSet<TransfersHistory>();
         }
     
-        public int Footballer_Id { get; set; }
-        public string FullName { get; set; }
-        public int TransferCost { get; set; }
         public int Characteristic_Id { get; set; }
-        public int FootballClub_Id { get; set; }
-        public byte[] Photo { get; set; }
-        public int Position_Id { get; set; }
-        public int Citizenship_Id { get; set; }
+        public int Pace { get; set; }
+        public int Shooting { get; set; }
+        public int Passing { get; set; }
+        public int Dribbling { get; set; }
+        public int Deffending { get; set; }
+        public int Physicality { get; set; }
     
-        public virtual Citizenships Citizenships { get; set; }
-        public virtual FootballClubs FootballClubs { get; set; }
-        public virtual Positions Positions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Footballers> Footballers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransfersHistory> TransfersHistory { get; set; }
-        public virtual Characteristics Characteristics { get; set; }
     }
 }

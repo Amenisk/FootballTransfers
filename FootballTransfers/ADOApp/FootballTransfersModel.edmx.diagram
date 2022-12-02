@@ -4,23 +4,28 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d97754af6850498bae7d8d082e032ca2" Name="Diagram1">
-        <EntityTypeShape EntityType="FootballTransfersModel.Accounts" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FootballTransfersModel.Characterics" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+      <Diagram DiagramId="65bf631a68c447e988202117f734fc07" Name="Diagram1">
+        <EntityTypeShape EntityType="FootballTransfersModel.Accounts" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootballTransfersModel.Citizenships" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FootballTransfersModel.FootballClubs" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FootballTransfersModel.Footballers" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FootballTransfersModel.Roles" Width="1.5" PointX="3.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootballTransfersModel.Footballers" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootballTransfersModel.Positions" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootballTransfersModel.Roles" Width="1.5" PointX="3.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootballTransfersModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FootballTransfersModel.TransfersHistory" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FootballTransfersModel.Users" Width="1.5" PointX="6" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootballTransfersModel.Users" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
         <AssociationConnector Association="FootballTransfersModel.FK_Accounts_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="FootballTransfersModel.FK_Footballers_Characterics" ManuallyRouted="false" />
+        <AssociationConnector Association="FootballTransfersModel.FK_Footballers_Nationalities" ManuallyRouted="false" />
         <AssociationConnector Association="FootballTransfersModel.FK_Footballers_FootballClub" ManuallyRouted="false" />
         <AssociationConnector Association="FootballTransfersModel.FK_TransfersHistory_FootballClub" ManuallyRouted="false" />
         <AssociationConnector Association="FootballTransfersModel.FK_TransfersHistory_FootballClub1" ManuallyRouted="false" />
         <AssociationConnector Association="FootballTransfersModel.FK_Users_FootballClub" ManuallyRouted="false" />
+        <AssociationConnector Association="FootballTransfersModel.FK_Footballers_Positions" ManuallyRouted="false" />
         <AssociationConnector Association="FootballTransfersModel.FK_TransfersHistory_Footballers" ManuallyRouted="false" />
         <AssociationConnector Association="FootballTransfersModel.FK_Users_Roles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="FootballTransfersModel.sysdiagrams" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="FootballTransfersModel.Characteristics" Width="1.5" PointX="7.375" PointY="1" />
+        <AssociationConnector Association="FootballTransfersModel.FK_Footballers_Characterics1" />
+        <AssociationConnector Association="FootballTransfersModel.FK_TransfersHistory_Characteristics" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

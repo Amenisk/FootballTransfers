@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FootballTransfers.ADOApp;
 
-namespace FootballTransfers.Pages
+namespace FootballTransfers.PagesApp
 {
     /// <summary>
     /// Логика взаимодействия для RegistrationPage.xaml
@@ -38,6 +38,13 @@ namespace FootballTransfers.Pages
             if (tbLogin.Text != "" && tbPassword.Text != "" 
                 && tbFullName.Text != "" && cmbRoles.SelectedItem != null)
             {
+                if(!CheckNewLogin(tbLogin.Text))
+                {
+                    MessageBox.Show("User with this login already exists!", "Error!",
+                           MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
                 var newUser = new Users()
                 {
                     FullName = tbFullName.Text,
@@ -98,6 +105,13 @@ namespace FootballTransfers.Pages
             tbPassword.Text = "";
             cmbRoles.SelectedItem = null;
             cmbClubs.SelectedItem = null;
+        }
+
+        private bool CheckNewLogin(string login)
+        {
+            var user = App.Connection.Accounts.FirstOrDefault(x => x.Login == login);
+
+            return user == null;
         }
     }
 }

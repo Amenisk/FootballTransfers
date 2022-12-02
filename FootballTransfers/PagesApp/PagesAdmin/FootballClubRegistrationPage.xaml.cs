@@ -16,7 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FootballTransfers.ADOApp;
 
-namespace FootballTransfers.PageApp.PagesAdmin
+namespace FootballTransfers.PagesApp.PagesAdmin
 {
     /// <summary>
     /// Логика взаимодействия для FootballClubRegistrationPage.xaml
@@ -38,7 +38,7 @@ namespace FootballTransfers.PageApp.PagesAdmin
                 if (dialog.ShowDialog() != null)
                 {
                     _logo = File.ReadAllBytes(dialog.FileName);
-                    BtnSelect.Background = Brushes.Green;
+                    BtnSelect.Background = Brushes.Red;
                 }
             }
             catch
@@ -86,7 +86,12 @@ namespace FootballTransfers.PageApp.PagesAdmin
             tbName.Text = "";
             tbBudget.Text = "";
             _logo = null;
-            btnSelectLogo.Background = Brushes.LightGray;
+            btnSelectLogo.Background = Brushes.Green;
+        }
+
+        private void Back(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MainAdminPage());
         }
     }
 }

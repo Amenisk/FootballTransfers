@@ -26,12 +26,14 @@ namespace FootballTransfers.ADOApp
         }
     
         public virtual DbSet<Accounts> Accounts { get; set; }
-        public virtual DbSet<Characterics> Characterics { get; set; }
+        public virtual DbSet<Citizenships> Citizenships { get; set; }
         public virtual DbSet<FootballClubs> FootballClubs { get; set; }
         public virtual DbSet<Footballers> Footballers { get; set; }
+        public virtual DbSet<Positions> Positions { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TransfersHistory> TransfersHistory { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Characteristics> Characteristics { get; set; }
     }
 }

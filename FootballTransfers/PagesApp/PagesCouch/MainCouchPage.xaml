@@ -1,9 +1,9 @@
-﻿<Page x:Class="FootballTransfers.PageApp.PagesCouch.MainCouchPage"
+﻿<Page x:Class="FootballTransfers.PagesApp.PagesCouch.MainCouchPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FootballTransfers.PageApp.PagesCouch"
+      xmlns:local="clr-namespace:FootballTransfers.PagesApp.PagesCouch"
       mc:Ignorable="d" 
       d:DesignHeight="585" d:DesignWidth="1040"
       Title="MainCouchPage">
@@ -12,6 +12,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -25,31 +26,37 @@
         </StackPanel>
         <Grid Grid.Row="1" Grid.Column="0">
             <StackPanel VerticalAlignment="Center">
-                <Button Click="SellFootballer">Sell footballer</Button>
-                <Button Click="BuyFootballer">Buy footballer</Button>
+                <Button Click="SellFootballer" Margin="5">Sell footballer</Button>
+                <Button Click="BuyFootballer" Margin="5">Buy footballer</Button>
+                <Button Click="GetListOfTransfers" Margin="5" Cursor="Hand">Transfers</Button>
             </StackPanel>
             <StackPanel VerticalAlignment="Bottom">
                 <TextBlock x:Name="tbBudget" Text="Budget: " VerticalAlignment="Bottom"></TextBlock>
             </StackPanel>
         </Grid>
-        <StackPanel Grid.Row="1" Grid.Column="1">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Width="240">Full name</TextBlock>
-                <TextBlock Width="240">Position</TextBlock>
-                <TextBlock Width="240">Transfer cost</TextBlock>
-            </StackPanel>
-            <ListView x:Name="lvFootballers">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Width="240" Text="{Binding FullName}"></TextBlock>
-                            <TextBlock Width="240" Text="{Binding Position}"></TextBlock>
-                            <TextBlock Width="240" Text="{Binding TransferCost}"></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Button HorizontalAlignment="Center" Width="100" Click="GetInfo">Info</Button>
+        <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
+            <Button Click="LogOut" Width="100" Margin="5">Log out</Button>
         </StackPanel>
+        <ScrollViewer Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="240">Full name</TextBlock>
+                    <TextBlock Width="240">Position</TextBlock>
+                    <TextBlock Width="240">Transfer cost</TextBlock>
+                </StackPanel>
+                <ListView x:Name="lvFootballers">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="240" Text="{Binding FullName}"></TextBlock>
+                                <TextBlock Width="240" Text="{Binding Positions.Name}"></TextBlock>
+                                <TextBlock Width="240" Text="{Binding TransferCost}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button HorizontalAlignment="Center" Width="100" Click="GetInfo" Margin="5">Info</Button>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

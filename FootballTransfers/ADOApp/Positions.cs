@@ -12,19 +12,18 @@ namespace FootballTransfers.ADOApp
     using System;
     using System.Collections.Generic;
     
-    public partial class TransfersHistory
+    public partial class Positions
     {
-        public int Transfer_Id { get; set; }
-        public int Footballer_Id { get; set; }
-        public int Characteristic_Id { get; set; }
-        public int ClubOfSale { get; set; }
-        public int ClubOfPurchase { get; set; }
-        public int TransferCost { get; set; }
-        public System.DateTime DateAndTime { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Positions()
+        {
+            this.Footballers = new HashSet<Footballers>();
+        }
     
-        public virtual FootballClubs FootballClubs { get; set; }
-        public virtual FootballClubs FootballClubs1 { get; set; }
-        public virtual Footballers Footballers { get; set; }
-        public virtual Characteristics Characteristics { get; set; }
+        public int Position_Id { get; set; }
+        public string Name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Footballers> Footballers { get; set; }
     }
 }
