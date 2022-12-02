@@ -20,7 +20,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
-            <Button Click="LogOut" Width="100">Log out</Button>
+            <Button Click="LogOut" Width="100" Margin="5">Log out</Button>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
             <Button Click="RegisterFootballClub" Margin="5">Register football club</Button>

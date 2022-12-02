@@ -25,7 +25,25 @@ namespace FootballTransfers.PagesApp
         {
             InitializeComponent();
             cmbRoles.ItemsSource = App.Connection.Roles.ToList();
-            cmbClubs.ItemsSource = App.Connection.FootballClubs.ToList();
+            var clubs = new List<FootballClubs>();
+            var allClubs = App.Connection.FootballClubs.ToList();
+            var coaches = App.Connection.Users.Where(x => x.FootballClub_Id != null).ToList();
+            var idClubs = new List<int>();
+
+            foreach(var coach in coaches)
+            {
+                idClubs.Add(Convert.ToInt32(coach.FootballClub_Id));
+            }
+
+            foreach(var club in allClubs)
+            {
+                if (idClubs.Contains(club.FootballClub_Id))
+                    continue;
+
+                clubs.Add(club);
+;            }
+
+            cmbClubs.ItemsSource = clubs;
         }
 
         private void Reverse(object sender, RoutedEventArgs e)
