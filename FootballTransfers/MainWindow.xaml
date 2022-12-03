@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FootballTransfers"
         mc:Ignorable="d"
-        Title="MainWindow" Height="585" Width="1040">
+        Title="Football transfers" Height="585" Width="1040">
     <Grid>
         <Frame x:Name="MainFrame"></Frame>
     </Grid>

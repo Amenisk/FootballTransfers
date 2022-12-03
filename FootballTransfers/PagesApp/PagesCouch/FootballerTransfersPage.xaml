@@ -29,7 +29,7 @@
                     <TextBlock Text="Club of sale" Width="100"></TextBlock>
                     <TextBlock Text="Club of purchase" Width="100"></TextBlock>
                     <TextBlock Text="Transfer cost" Width="100"></TextBlock>
-                    <TextBlock Text="Date and time" Width="130"></TextBlock>
+                    <TextBlock Text="Date and time" Width="150"></TextBlock>
                     <TextBlock Text="Pace" Width="80"></TextBlock>
                     <TextBlock Text="Shooting" Width="80"></TextBlock>
                     <TextBlock Text="Passing" Width="80"></TextBlock>
@@ -44,7 +44,7 @@
                                 <TextBlock Text="{Binding FootballClubs.Name}" Width="100"></TextBlock>
                                 <TextBlock Text="{Binding FootballClubs1.Name}" Width="100"></TextBlock>
                                 <TextBlock Text="{Binding TransferCost}" Width="100"></TextBlock>
-                                <TextBlock Text="{Binding DateAndTime}" Width="130"></TextBlock>
+                                <TextBlock Text="{Binding DateAndTime}" Width="150"></TextBlock>
                                 <TextBlock Text="{Binding Characteristics.Pace}" Width="80"></TextBlock>
                                 <TextBlock Text="{Binding Characteristics.Shooting}" Width="80"></TextBlock>
                                 <TextBlock Text="{Binding Characteristics.Passing}" Width="80"></TextBlock>

@@ -28,7 +28,7 @@
             <TextBlock>Budget</TextBlock>
             <TextBox x:Name="tbBudget"></TextBox>
             <Button x:Name="btnSelectLogo" Click="SelectLogo" Margin="5">Select logo</Button>
-            <Button Click="SaveFootballClub" Margin="5" Cursor="Hand">Register fotball club</Button>
+            <Button Click="SaveFootballClub" Margin="5" Cursor="Hand">Register football club</Button>
         </StackPanel>
     </Grid>
 </Page>
